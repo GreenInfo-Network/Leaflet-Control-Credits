@@ -23,6 +23,8 @@ L.CreditsControl = L.Control.extend({
         // create our container, and set the background image
         var container = L.DomUtil.create('div', 'leaflet-credits-control', container);
         container.style.backgroundImage = 'url(' + this.options.image + ')';
+        if (this.options.width)  container.style.paddingRight = this.options.width + 'px';
+        if (this.options.height) container.style.height       = this.options.height + 'px';
 
         // generate the hyperlink to the left-hand side
         var link        = L.DomUtil.create('a', '', container);

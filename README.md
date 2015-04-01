@@ -18,11 +18,12 @@ Then add the control:
     }).addTo(map);
 
 #Options
-All options are REQUIRED.
 
-* *image* - An URL of the image to put into the right-hand side. May be any size you like, but to look good should be appropriate to the _text_ content. I like 35x35 to 40x40 for two lines.
-* *text* - When the image is clicked, this HTML will be shown. Up to you, but should be fairly brief and have a height that looks good for your image. I like two lines for a 35x35 image.
-* *link* - The left-hand text is a hyperlink, and this is the target URL. It will open in a new window/tab.
+* *image* - REQUIRED. An URL of the image to put into the right-hand side. May be any size you like, but to look good should be appropriate to the _text_ content. I like 35x35 to 40x40 for two lines.
+* *text* - REQUIRED. When the image is clicked, this HTML will be shown. Up to you, but should be fairly brief and have a height that looks good for your image. I like two lines for a 35x35 image.
+* *link* - REQUIRED. The left-hand text is a hyperlink, and this is the target URL. It will open in a new window/tab.
+* *width* - Optional; the width of the control. Should match that if your image. Defaults to 39px.
+* *height* - Optional; the height of the control. Should match that if your image. Defaults to 39px.
 
 #Credits
 Thanks to my employer, GreenInfo Network http://www.greeninfo.org/ for the time to make this control.
