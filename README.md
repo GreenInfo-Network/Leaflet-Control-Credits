@@ -24,3 +24,5 @@ All options are REQUIRED.
 * *text* - When the image is clicked, this HTML will be shown. Up to you, but should be fairly brief and have a height that looks good for your image. I like two lines for a 35x35 image.
 * *link* - The left-hand text is a hyperlink, and this is the target URL. It will open in a new window/tab.
 
+#Credits
+Thanks to my employer, GreenInfo Network http://www.greeninfo.org/ for the time to make this control.
