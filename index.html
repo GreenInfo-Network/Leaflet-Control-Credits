@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>L.Control.Credits</title>
+    <link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+    <!-- the control code, just these two files -->
+    <script type="text/javascript" src="dist/leaflet-control-credits.js"></script>
+    <link rel="stylesheet" href="dist/leaflet-control-credits.css" />
+
+    <!-- the remaining HTML and JS is for the demo -->
+    <style type="text/css" >
+    body {
+    	padding: 0;
+	margin: 0;
+    }
+    html, body, #map {
+	height: 100%;
+    }
+    </style>
+
+    <script type="text/javascript">
+    function init() {
+	var map = L.map('map');
+
+	L.tileLayer('https://{s}.tiles.mapbox.com/v3/examples.map-i875mjb7/{z}/{x}/{y}.png', {
+    	    maxZoom: 18,
+	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+			 '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+    			 'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+	}).addTo(map);
+        map.setView([37.7833,-122.4167], 12);
+
+        L.controlCredits({
+        	image: "./greeninfo.png",
+        	link: "http://www.greeninfo.org/",
+        	text: "Interactive mapping<br/>by GreenInfo Network"
+        }).addTo(map);
+    }
+    </script>
+</head>
+<body onLoad="init()">
+
+    <div id="map"></div>
+
+</body>
+</html>
