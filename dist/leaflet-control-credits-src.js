@@ -11,6 +11,10 @@ L.CreditsControl = L.Control.extend({
         position: 'bottomright'
     },
     initialize: function(options) {
+        if (! options.text)  throw "L.CreditsControl missing required option: text";
+        if (! options.image) throw "L.CreditsControl missing required option: image";
+        if (! options.link)  throw "L.CreditsControl missing required option: link";
+
         L.setOptions(this,options);
     },
     onAdd: function (map) {
