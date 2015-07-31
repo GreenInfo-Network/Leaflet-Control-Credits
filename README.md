@@ -1,7 +1,9 @@
 # L.Control.Credits
 A Leaflet control for displaying credits in the corner. Supply a hyperlink to your image, and some text.
 
-# Demo / Installation
+Live demo: http://gregallensworth.github.io/L.Control.Credits/
+
+# Installation
 See index.html for a demo.
 
 Two files are required: _leaflet-constrol-credits.js_ and _leaflet-constrol-credits.css_
