@@ -32,11 +32,17 @@
 	}).addTo(map);
         map.setView([37.7833,-122.4167], 12);
 
-        L.controlCredits({
+        var credctrl = L.controlCredits({
         	image: "./greeninfo.png",
         	link: "http://www.greeninfo.org/",
-        	text: "Interactive mapping<br/>by GreenInfo Network"
+        	text: "Credits<br/>Control"
         }).addTo(map);
+
+	// demo: setText()
+	// wait 5 seconds then change the credits content
+	setTimeout(function () {
+	    credctrl.setText("Interactive mapping<br/>by GreenInfo Network");
+	}, 5000);
     }
     </script>
 </head>

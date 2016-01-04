@@ -49,6 +49,15 @@ L.CreditsControl = L.Control.extend({
             }
         });
 
+        // afterthought keep a reference to our container and to the link,
+        // in case we need to change their content later via setText() et al
+        this._container = container;
+        this._link      = link;
+
+        // all done
         return container;
+    },
+    setText: function (html) {
+        this._link.innerHTML = html;
     }
 });
