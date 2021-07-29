@@ -2,8 +2,10 @@
 <html>
 <head>
     <title>L.Control.Credits</title>
-    <link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-    <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
     <!-- the control code, just these two files -->
     <script type="text/javascript" src="dist/leaflet-control-credits.js"></script>
@@ -19,10 +21,23 @@
 	height: 100%;
     }
     </style>
+    <style type="text/css">
+    /* hack for Leaflet 1.7.1 which only flashes ARIA outlines (though keeps focus) which misses the point of ARIA outlines */
+    .leaflet-container :focus {
+        outline-color: -webkit-focus-ring-color !important;
+        outline-style: auto !important;
+        outline-width: thin !important;
+        outline: revert !important;
+    }
+    </style>
 
     <script type="text/javascript">
     function init() {
-    	var map = L.map('map');
+    	var map = L.map('map', {
+            maxZoom: 18,
+            minZoom: 6,
+            keyboard: true,
+        });
     	L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
     	    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>',
     	}).addTo(map);
@@ -38,7 +53,7 @@
 </head>
 <body onLoad="init()">
 
-    <div id="map"></div>
+    <div id="map" tabindex="0"></div>
 
 </body>
 </html>
