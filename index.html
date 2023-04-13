@@ -32,6 +32,7 @@
     </style>
 
     <script type="text/javascript">
+    var credits;
     function init() {
     	var map = L.map('map', {
             maxZoom: 18,
@@ -43,10 +44,12 @@
     	}).addTo(map);
         map.setView([37.7833,-122.4167], 12);
 
-        var credctrl = L.controlCredits({
-        	image: "./greeninfo.png",
-        	link: "http://www.greeninfo.org/",
-        	text: "Interactive mapping<br/>by GreenInfo Network"
+        credits = L.controlCredits({
+        	imageurl: './greeninfo.png',
+        	tooltip: 'Made by GreenInfo Network',
+        	width: '45px',
+        	height: '45px',
+        	expandcontent: 'Interactive mapping<br/>by <a href="https://www.greeninfo.org/" target="_blank">GreenInfo Network</a>',
         }).addTo(map);
     }
     </script>

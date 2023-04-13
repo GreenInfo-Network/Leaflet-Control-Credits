@@ -10,57 +10,67 @@ L.CreditsControl = L.Control.extend({
     options: {
         position: 'bottomright'
     },
-    initialize: function(options) {
-        if (! options.text)  throw "L.CreditsControl missing required option: text";
-        if (! options.image) throw "L.CreditsControl missing required option: image";
-        if (! options.link)  throw "L.CreditsControl missing required option: link";
+    initialize: function (options) {
+        const settings = Object.assign({
+            width: '50px',
+            height: '50px',
+        }, options);
 
-        L.setOptions(this,options);
+        if (! settings.expandcontent) throw "L.CreditsControl missing required option: expandcontent";
+        if (! settings.imageurl)      throw "L.CreditsControl missing required option: imageurl";
+        if (! settings.tooltip)       throw "L.CreditsControl missing required option: tooltip";
+
+        L.setOptions(this, settings);
     },
     onAdd: function (map) {
         this._map = map;
+        this._container = L.DomUtil.create('div', 'leaflet-credits-control');
 
-        // create our container, and set the background image
-        var container = L.DomUtil.create('div', 'leaflet-credits-control', container);
-        container.style.backgroundImage = 'url(' + this.options.image + ')';
-        container.tabIndex = 0;
-        if (this.options.width)  container.style.paddingRight = this.options.width + 'px';
-        if (this.options.height) container.style.height       = this.options.height + 'px';
+        const contentdivid = `leaflet-credits-control-expandcontent-${Math.round(1000000 * Math.random())}`;
 
-        // generate the hyperlink to the left-hand side
-        var link        = L.DomUtil.create('a', '', container);
-        link.target     = '_blank';
-        link.href       = this.options.link;
-        link.innerHTML  = this.options.text;
+        this._content = L.DomUtil.create('div', 'leaflet-credits-control-expandcontent', this._container);
+        this._content.id = contentdivid;
+        this.setHtml(this.options.expandcontent);
 
-        // create a linkage between this control and the hyperlink bit, since we will be toggling CSS for that hyperlink section
-        container.link = link;
+        this._button = L.DomUtil.create('button', 'leaflet-credits-control', this._container);
+        this._button.title = this.options.tooltip;
+        this._button.setAttribute('aria-label', this.options.tooltip);
+        this._button.style.backgroundImage = `url(${this.options.imageurl})`;
+        if (this.options.width)  this._button.style.width = this.options.width;
+        if (this.options.height) this._button.style.height = this.options.height;
+        this._button.setAttribute('aria-controls', contentdivid);
 
-        // clicking the control (the image bit) expands the left-hand hyperlink/text bit
-        L.DomEvent.addListener(container, 'click', function () {
-            var link = this.link;
-            if ( L.DomUtil.hasClass(link, 'leaflet-credits-showlink') ) {
-                L.DomUtil.removeClass(link, 'leaflet-credits-showlink');
-            } else {
-                L.DomUtil.addClass(link, 'leaflet-credits-showlink');
-            }
-        });
-        L.DomEvent.addListener(container, 'keydown', function(event) {
-            if (event.key == 'Enter') container.click();
+        // click image button = toggle left-side expandcontent
+        L.DomEvent.addListener(this._button, 'click', () => {
+            this.toggleUi();
         });
 
         // keep mouse events from falling through to the map: don't drag-pan or double-click the map on accident
-        L.DomEvent.disableClickPropagation(container);
-        L.DomEvent.disableScrollPropagation(container);
+        L.DomEvent.disableClickPropagation(this._container);
+        L.DomEvent.disableScrollPropagation(this._container);
 
-        // keep a reference to our container and to the link
-        this._container = container;
-        this._link      = link;
+        // collapse by default
+        this.collapseUi();
 
         // all done
-        return container;
+        return this._container;
     },
-    setText: function (html) {
-        this._link.innerHTML = html;
+    toggleUi: function () {
+        if (this.isExpanded()) this.collapseUi();
+        else this.expandUi();
+    },
+    expandUi: function () {
+        L.DomUtil.removeClass(this._container, 'leaflet-credits-control-collapsed');
+        this._button.setAttribute('aria-expanded', 'true');
+    },
+    collapseUi: function () {
+        L.DomUtil.addClass(this._container, 'leaflet-credits-control-collapsed');
+        this._button.setAttribute('aria-expanded', 'false');
+    },
+    isExpanded: function () {
+        return ! L.DomUtil.hasClass(this._container, 'leaflet-credits-control-collapsed');
+    },
+    setHtml: function (html) {
+        this._content.innerHTML = html;
     }
 });

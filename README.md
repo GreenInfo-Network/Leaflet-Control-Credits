@@ -1,6 +1,6 @@
 # L.Control.Credits
 
-A Leaflet control for displaying credits in the corner. Supply a hyperlink to your image, and some text.
+A Leaflet control for displaying credits in the corner. Displays an image/logo, and clicking that image/logo will expand to show a brief message with credits and links.
 
 https://github.com/GreenInfo-Network/Leaflet-Control-Credits
 
@@ -18,30 +18,31 @@ Two files are required: _leaflet-constrol-credits.js_ and _leaflet-constrol-cred
 <link rel="stylesheet" href="dist/leaflet-control-credits.css" />
 ```
 
-Then add the control. In this example we keep a reference to the control, so we can call methods on it later.
+Then add the control.
 
 ```
-var credctrl = L.controlCredits({
-    image: "./greeninfo.png",
-    link: "http://www.greeninfo.org/",
-    text: "Interactive mapping<br/>by GreenInfo Network"
+L.controlCredits({
+    imageurl: './greeninfo.png',
+    tooltip: 'Made by GreenInfo Network',
+    width: '45px',
+    height: '45px',
+    expandcontent: 'Interactive mapping<br/>by <a href="https://www.greeninfo.org/" target="_blank">GreenInfo Network</a>',
 }).addTo(map);
 ```
 
 
 # Options
 
-* *image* - REQUIRED. An URL of the image to put into the right-hand side. May be any size you like, but to look good should be appropriate to the _text_ content. I like 35x35 to 40x40 for two lines.
-* *text* - REQUIRED. When the image is clicked, this HTML will be shown. Up to you, but should be fairly brief and have a height that looks good for your image. I like two lines for a 35x35 image.
-* *link* - REQUIRED. The left-hand text is a hyperlink, and this is the target URL. It will open in a new window/tab.
-* *width* - Optional; the width of the control. Should match that of your image. Defaults to 39px.
-* *height* - Optional; the height of the control. Should match that of your image. Defaults to 39px.
-
+* `imageurl` - URL of the image to display in the button.
+* `width` - Specify width of the button & image. Default is `50px`
+* `height` - Specify height of the button & image. Default is `50px`
+* `tooltip` - A tooltip message displayed when the button is hovered. This is also the ARIA label for the button.
+* `expandcontent` - HTML string which will be displayed on the left when the image/logo button is clicked.
 
 # Methods
 
-* *setText(html)* - Replace the *text* content with new HTML.
-
-
-# Credits
-Thanks to my employer, GreenInfo Network http://www.greeninfo.org/ for the time to make this control.
+* `expandUi()` - Expand the UI to show the left-side HTML content.
+* `collapseUi()` - Collapse the UI to hide the left-side HTML content.
+* `toggleUi()` - Expand the UI if currently collapsed, or collapse if currently expanded.
+* `isExpanded()` - Return true if the content is currently expanded, false if not.
+* `setHtml(html)` - Replace the expanded content with new HTML.

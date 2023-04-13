@@ -1,36 +1,38 @@
 .leaflet-credits-control {
-    margin-right:0 !important;
-    margin-bottom:0 !important;
-
-    height:39px;        /* defined in the JavaScript code */
-    padding-right:39px; /* defined in the JavaScript code */
-
-    background-image:none; /* defined in the JavaScript code */
-    background-repeat:no-repeat;
-    background-position:100% 0;
-
-    background-color:white;
-    opacity:0.90;
-    border-radius:5px;
-    border:4px solid rgba(0, 0, 0, 0.1);
-
-    cursor:pointer;
+    background-color: white;
+    opacity: 0.90;
+    border-radius: 5px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
-.leaflet-credits-control a {
-    font-size:8pt;
-    color:#333333 !important;
-    text-decoration:none;
-
-    text-align:right;
-
-    display:none; /* becomes visible on mouse hover, see creditsControl */
+.leaflet-credits-control button {
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    transition: background 250ms ease-in-out, transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    color: black;
+    background-color: white;
 }
-.leaflet-credits-control a.leaflet-credits-showlink {
-    display:inline-block;
-    padding-left:5px;
-    padding-right:5px;
+.leaflet-credits-control button {
+    background-image: none; /* defined in the JavaScript code */
+    background-size: cover;
+}
 
-    margin-top:5px;
+.leaflet-credits-control {
+    display: flex;
+    align-items: center;
+}
 
-    line-height:15px;
+.leaflet-credits-control .leaflet-credits-control-expandcontent {
+    padding: 0 0.5rem;
+}
+.leaflet-credits-control.leaflet-credits-control-collapsed .leaflet-credits-control-expandcontent {
+    display: none;
+}
+
+.leaflet-credits-control .leaflet-credits-control-expandcontent {
+    font-size: 9pt;
+    color: black;
 }
