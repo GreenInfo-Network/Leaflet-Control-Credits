@@ -33,6 +33,7 @@ L.CreditsControl = L.Control.extend({
         this.setHtml(this.options.expandcontent);
 
         this._button = L.DomUtil.create('button', 'leaflet-credits-control', this._container);
+        this._button.type = 'button';
         this._button.title = this.options.tooltip;
         this._button.setAttribute('aria-label', this.options.tooltip);
         this._button.style.backgroundImage = `url(${this.options.imageurl})`;
