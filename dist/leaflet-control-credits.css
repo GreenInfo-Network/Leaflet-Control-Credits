@@ -25,6 +25,10 @@
     align-items: center;
 }
 
+.leaflet-credits-control button:focus {
+  outline: 2px solid black !important;
+}
+
 .leaflet-credits-control .leaflet-credits-control-expandcontent {
     padding: 0 0.5rem;
 }
