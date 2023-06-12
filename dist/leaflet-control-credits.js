@@ -18,6 +18,7 @@ L.CreditsControl = L.Control.extend({
 
         if (! settings.expandcontent) throw "L.CreditsControl missing required option: expandcontent";
         if (! settings.imageurl)      throw "L.CreditsControl missing required option: imageurl";
+        if (! settings.imagealt)       throw "L.CreditsControl missing required option: alt text";
         if (! settings.tooltip)       throw "L.CreditsControl missing required option: tooltip";
 
         L.setOptions(this, settings);
@@ -32,14 +33,20 @@ L.CreditsControl = L.Control.extend({
         this._content.id = contentdivid;
         this.setHtml(this.options.expandcontent);
 
+
         this._button = L.DomUtil.create('button', 'leaflet-credits-control', this._container);
         this._button.type = 'button';
         this._button.title = this.options.tooltip;
-        this._button.setAttribute('aria-label', this.options.tooltip);
-        this._button.style.backgroundImage = `url(${this.options.imageurl})`;
         if (this.options.width)  this._button.style.width = this.options.width;
         if (this.options.height) this._button.style.height = this.options.height;
         this._button.setAttribute('aria-controls', contentdivid);
+
+        const logo = L.DomUtil.create('img', 'leaflet-logo', this._button);
+        logo.setAttribute('src', this.options.imageurl);
+        logo.setAttribute('alt', this.options.imagealt);
+        if (this.options.width) logo.style.width = this.options.width;
+        if (this.options.height) logo.style.height = this.options.height;
+
 
         // click image button = toggle left-side expandcontent
         L.DomEvent.addListener(this._button, 'click', () => {

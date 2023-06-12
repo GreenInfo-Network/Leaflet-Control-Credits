@@ -14,15 +14,19 @@
     -moz-appearance: none;
     color: black;
     background-color: white;
-}
-.leaflet-credits-control button {
     background-image: none; /* defined in the JavaScript code */
     background-size: cover;
+
+    padding: 0;
 }
 
 .leaflet-credits-control {
     display: flex;
     align-items: center;
+}
+
+.leaflet-credits-control button:focus {
+  outline: 2px solid black !important;
 }
 
 .leaflet-credits-control .leaflet-credits-control-expandcontent {
